@@ -1,0 +1,17 @@
+services:
+  tensorflow:
+    image: nvcr.io/nvidia/tensorflow:24.04-tf2-py3
+    container_name: tensorflow_container
+    volumes:
+      - /home/${USER}/workspace:/workspace
+    working_dir: /workspace
+    stdin_open: true   # keep container interactive
+    tty: true
+    command: bash
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
