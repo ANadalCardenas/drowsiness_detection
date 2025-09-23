@@ -1,11 +1,13 @@
+version: "3.9"
+
 services:
-  tensorflow:
-    image: nvcr.io/nvidia/tensorflow:24.04-tf2-py3
-    container_name: tensorflow_container
+  yolov5:
+    build: .
+    container_name: yolov5_container
     volumes:
       - /home/${USER}/workspace:/workspace
     working_dir: /workspace
-    stdin_open: true   # keep container interactive
+    stdin_open: true
     tty: true
     command: bash
     deploy:
