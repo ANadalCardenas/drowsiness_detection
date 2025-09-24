@@ -2,11 +2,14 @@ version: "3.9"
 
 services:
   yolov5:
-    build: .
+    build:
+      context: .
+      dockerfile: Dockerfile 
+    image: rock_paper_scissors_yolov5:latest
     container_name: yolov5_container
     volumes:
-      - /home/${USER}/workspace:/workspace
-    working_dir: /workspace
+      - /home/${USER}/workspace/rock_paper_scissors/scripts:/workspace/rock_paper_scissors/scripts
+    working_dir: /workspace/rock_paper_scissors
     stdin_open: true
     tty: true
     command: bash
