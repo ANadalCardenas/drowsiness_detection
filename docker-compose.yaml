@@ -1,22 +1,24 @@
-version: "3.9"
-
 services:
   yolov5:
     build:
       context: .
       dockerfile: Dockerfile 
-    image: rock_paper_scissors_yolov5:latest
+    image: yolov5:latest
     container_name: yolov5_container
     volumes:
       - /home/${USER}/workspace/rock_paper_scissors/scripts:/workspace/rock_paper_scissors/scripts
+      - /home/${USER}/workspace/rock_paper_scissors/data:/workspace/rock_paper_scissors/data
+      - /tmp/.X11-unix:/tmp/.X11-unix:rw
+      - ${XAUTHORITY:-$HOME/.Xauthority}:/tmp/.Xauthority:ro
+    devices:
+      - /dev/video0:/dev/video0
     working_dir: /workspace/rock_paper_scissors
     stdin_open: true
     tty: true
     command: bash
-    deploy:
-      resources:
-        reservations:
-          devices:
-            - driver: nvidia
-              count: all
-              capabilities: [gpu]
+    gpus: all
+    environment:
+      - NVIDIA_VISIBLE_DEVICES=all
+      - DISPLAY=${DISPLAY}
+      - QT_X11_NO_MITSHM=1
+      - XAUTHORITY=/tmp/.Xauthority

@@ -4,89 +4,68 @@ import cv2
 import os
 import time
 import uuid
+import shutil
 
 def main():
     # Load default YOLOv5s model from PyTorch Hub
     model = torch.hub.load('ultralytics/yolov5', 'yolov5s', trust_repo=True)
+    # Base path for images
+    # Base directory
+    IMAGES_PATH = os.path.join("data", "images")
 
-    # Initialize webcam
-    """
-    cap = cv2.VideoCapture(0)
-    while cap.isOpened():
-        ret, frame = cap.read()  # Capture frame-by-frame
-        if not ret:
-            break
-        
-        # Make detections 
-        results = model(frame)
-        
-        # Display the resulting frame
-        cv2.imshow('YOLO', np.squeeze(results.render()))
+    # If the path exists, remove it
+    if os.path.exists(IMAGES_PATH):
+        shutil.rmtree(IMAGES_PATH)
 
-        # Break the loop on 'q' key press
-        if cv2.waitKey(10) & 0xFF == ord('q'):
-            break
-     
-        # Break if window is closed manually
-        try:
-            if cv2.getWindowProperty('YOLO', cv2.WND_PROP_AUTOSIZE) < 0:
-                break
-        except cv2.error:
-            break
-
-    cap.release()
-    cv2.destroyAllWindows()
-    """
-
-    # Code for collecting images from webcam for custom dataset
-    IMAGES_PATH = os.path.join('data', 'images')
-    # Create the directory if it doesn't exist
+    # Create a new unique subfolder for this run
     os.makedirs(IMAGES_PATH, exist_ok=True)
+
     labels = ['rock', 'paper', 'scissors']
     number_imgs = 5
-    # Loop through labels
+
     for label in labels:
-        os.makedirs(os.path.join(IMAGES_PATH, label), exist_ok=True)
-        # Create the label directory
-        folder_path = os.path.join(IMAGES_PATH, label)
+        print(f"Starting collection for label: {label}")
+        os.makedirs(IMAGES_PATH, exist_ok=True)
+
+        # Open webcam for this label
         cap = cv2.VideoCapture(0)
-        # Loop through labels
-        while cap.isOpened():        
-            print('Collecting images for {}'.format(label))
-            time.sleep(5)
+        time.sleep(2)  # warm-up time
 
-            # Loop through image range
-            for img_num in range(number_imgs):
-                print('Collecting images for {}, image number {}'.format(label, img_num))
+        img_count = 0
+        while img_count < number_imgs:
+            ret, frame = cap.read()
+            if not ret:
+                print("⚠️ Failed to capture image")
+                break
 
-                # Webcam feed
-                ret, frame = cap.read()  # Capture frame-by-frame
-                if not ret:
-                    break
+            # Show live webcam feed
+            cv2.imshow(f'Image Collection: {label}', frame)
 
-                # Naming out image path
-                imgname = os.path.join(folder_path, label+'.'+str(uuid.uuid1())+'.jpg')
-
-                # Writes out image to file 
+            # Capture on spacebar, quit on q
+            key = cv2.waitKey(1) & 0xFF
+            if key == ord(' '):  # spacebar = save
+                imgname = os.path.join(IMAGES_PATH, f"{label}.{uuid.uuid1()}.jpg")
                 cv2.imwrite(imgname, frame)
+                img_count += 1
+                print(f"✅ Saved image {img_count} for {label}")
+            elif key == ord('q'):
+                cap.release()
+                cv2.destroyAllWindows()
+                return
 
-                # Render to the screen
-                cv2.imshow('Image Collection', frame)
-
-                # 2 second delay between captures
-                time.sleep(2)
-
-            if cv2.waitKey(10) & 0xFF == ord('q'):
-                break
-            # Break if window is closed manually
-            try:
-                if cv2.getWindowProperty('YOLO', cv2.WND_PROP_AUTOSIZE) < 0:
-                    break
-            except cv2.error:
-                break
         cap.release()
         cv2.destroyAllWindows()
-    
+        print(f"Finished collecting {img_count} images for {label}")
+        time.sleep(2)  # pause between labels
+
+    print("Image collection completed ✅")
+
+    # Get the parent folder of images (i.e., 'data')
+    base_dir = os.path.dirname(IMAGES_PATH)
+    # Create 'labels' folder at the same level
+    LABELS_PATH = os.path.join(base_dir, "labels")
+    os.makedirs(LABELS_PATH, exist_ok=True)
+
 
 if __name__ == "__main__":
     main()
