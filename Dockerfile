@@ -15,10 +15,11 @@ ARG WORKSPACE=/workspace/rock_paper_scissors
 RUN mkdir -p $WORKSPACE
 WORKDIR $WORKSPACE
 
-# Clone YOLOv5 repo
+# Install YOLOv5
 RUN git clone https://github.com/ultralytics/yolov5.git
-RUN git clone https://github.com/tzutalin/labelImg.git
-
-# Install YOLOv5 dependencies
 ENV PIP_BREAK_SYSTEM_PACKAGES=1
 RUN python3 -m pip install --no-cache-dir -r yolov5/requirements.txt
+
+# Install labelImg
+RUN apt-get install -y pyqt5-dev-tools
+RUN python3 -m pip install --no-cache-dir labelImg
