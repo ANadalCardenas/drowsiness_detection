@@ -7,13 +7,14 @@ import uuid
 import shutil
 
 LABELS = ['rock', 'paper', 'scissors']
-IMAGES_PATH = os.path.join("data", "images")
-NUM_IMGS = 5  # number of images to collect per label
+# current script folder = /workspace/rock_paper_scissors/scripts
+SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+PROJECT_ROOT = os.path.dirname(SCRIPT_DIR)  # goes one level up
+IMAGES_PATH = os.path.join(PROJECT_ROOT, "data", "images")
+# number of images to collect per label
+NUM_IMGS = 5 
 
 def main():
-   # Base directory
-   
-
     for label in LABELS:
         print(f"Starting collection for label: {label}")
         os.makedirs(IMAGES_PATH, exist_ok=True)
