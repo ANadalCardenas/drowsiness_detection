@@ -5,7 +5,7 @@ import os
 
 def main():
     # Load default YOLOv5s model from PyTorch Hub
-    model = torch.hub.load('ultralytics/yolov5', 'custom', path='/workspace/rock_paper_scissors/yolov5/runs/train/exp/weights/last.pt', force_reload=True)
+    model = torch.hub.load('ultralytics/yolov5', 'custom', path='/workspace/drowsiness_detection/model/exp/weights/best.pt', force_reload=True)
 
     # Initialize webcam
     cap = cv2.VideoCapture(0)
@@ -13,12 +13,14 @@ def main():
         ret, frame = cap.read()  # Capture frame-by-frame
         if not ret:
             break
+
+        frame = cv2.cvtColor(frame,  cv2.COLOR_BGR2RGB)
         
         # Make detections 
         results = model(frame)
         
         # Display the resulting frame
-        cv2.imshow('YOLO', np.squeeze(results.render()))
+        cv2.imshow("YOLO", np.array(results.render()[0])[:, :, ::-1])
 
         # Break the loop on 'q' key press
         if cv2.waitKey(10) & 0xFF == ord('q'):

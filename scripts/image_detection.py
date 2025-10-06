@@ -6,27 +6,11 @@ import numpy as np
 import cv2
 
 def main():
-    # Web image with yolov 5s model
-    """
-    # Load default YOLOv5s model from PyTorch Hub
-    model = torch.hub.load('ultralytics/yolov5', 'yolov5s', trust_repo=True)
-
-    # Image URL (public domain image of cars in traffic)
-    url = ("https://upload.wikimedia.org/wikipedia/commons/thumb/e/e4/"
-           "Cars_in_traffic_in_Auckland%2C_New_Zealand_-_copyright-free_photo_"
-           "released_to_public_domain.jpg/800px-"
-           "Cars_in_traffic_in_Auckland%2C_New_Zealand_-_copyright-free_photo_"
-           "released_to_public_domain.jpg")
-           
-    headers = {"User-Agent": "Mozilla/5.0 (compatible; yolo-test/1.0)"}
-    r = requests.get(url, headers=headers, timeout=15)
-    r.raise_for_status()
-    img = Image.open(io.BytesIO(r.content)).convert("RGB")
-    """
-    # P
-    # Make detectionsrivate image with mi model trained on rock paper scissors dataset
-    model = torch.hub.load('ultralytics/yolov5', 'custom', path='/workspace/rock_paper_scissors/yolov5/runs/train/exp/weights/best.pt', force_reload=True)
-    results = model("/workspace/rock_paper_scissors/data/image.jpg")
+    # Make detectionsrivate image with my model trained on private dataset
+    model = torch.hub.load('ultralytics/yolov5', 'custom', path='/workspace/drowsiness_detection/model/exp/weights/best.pt', force_reload=True)
+    img = cv2.imread("/workspace/drowsiness_detection/data/test/awake.3e3befe5-a20e-11f0-b1eb-1d37d0d6c335.jpg")
+    img = cv2.cvtColor(img,  cv2.COLOR_BGR2RGB)
+    results = model(img)
 
     # Print results to console
     results.print()
