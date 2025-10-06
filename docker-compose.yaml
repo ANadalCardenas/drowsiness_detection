@@ -5,17 +5,18 @@ services:
       dockerfile: Dockerfile 
     image: yolov5:latest
     container_name: yolov5_container
+    shm_size: '8gb'
     volumes:
-      - /home/${USER}/workspace/rock_paper_scissors/scripts:/workspace/rock_paper_scissors/scripts
-      - /home/${USER}/workspace/rock_paper_scissors/data:/workspace/rock_paper_scissors/data
+      - /home/${USER}/workspace/drowsiness_detection/scripts:/workspace/drowsiness_detection/scripts
+      - /home/${USER}/workspace/drowsiness_detection/data:/workspace/drowsiness_detection/data
+      - /home/${USER}/workspace/drowsiness_detection/model/exp:/workspace/drowsiness_detection/model/exp
       - /tmp/.X11-unix:/tmp/.X11-unix:rw
       - ${XAUTHORITY:-$HOME/.Xauthority}:/tmp/.Xauthority:ro
     devices:
       - /dev/video0:/dev/video0
-    working_dir: /workspace/rock_paper_scissors
+    working_dir: /workspace/drowsiness_detection
     stdin_open: true
     tty: true
-    command: bash
     gpus: all
     environment:
       - NVIDIA_VISIBLE_DEVICES=all
