@@ -6,13 +6,12 @@ import time
 import uuid
 import shutil
 
-LABELS = ['rock', 'paper', 'scissors']
-# current script folder = /workspace/rock_paper_scissors/scripts
+LABELS = ['awake', 'drowsy']
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 PROJECT_ROOT = os.path.dirname(SCRIPT_DIR)  # goes one level up
-IMAGES_PATH = os.path.join(PROJECT_ROOT, "data", "images")
+IMAGES_PATH = os.path.join(PROJECT_ROOT, "data", "test")
 # number of images to collect per label
-NUM_IMGS = 5 
+NUM_IMGS = 2
 
 def main():
     for label in LABELS:
