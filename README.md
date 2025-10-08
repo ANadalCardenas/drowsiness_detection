@@ -12,7 +12,7 @@ It includes scripts for:
 
 ### 🎥 Demo Video
 
-You can find a demonstration video showing how the model performs in real-time:
+The full demonstration video is available to view by clicking on the next GIF:
 
 [![Watch the demo](media/demo_preview.gif)](media/demo.webm)
 
