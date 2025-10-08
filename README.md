@@ -14,10 +14,7 @@ It includes scripts for:
 
 You can find a demonstration video showing how the model performs in real-time:
 
-<video width="640" controls>
-  <source src="./demo.webm" type="video/webm">
-  Your browser does not support the video tag.
-</video>
+[![Watch the demo](media/demo_preview.gif)](media/demo.webm)
 
 
 ---
