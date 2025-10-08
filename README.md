@@ -179,6 +179,5 @@ Mathematician & Computer Scientist specialized in AI and data analysis.
 
 ## 📜 License
 
-This project is released under the MIT License.  
+This project is released under the MIT License. [(License.txt)](License.txt)
 Feel free to use, modify, and distribute it for educational and research purposes.
-[(License.txt)](License.txt)
