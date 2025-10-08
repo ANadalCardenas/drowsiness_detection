@@ -67,7 +67,7 @@ python3 scripts/image_detection.py
 python3 scripts/webcam_detection.py
 ```
 
-Both scripts load your trained YOLOv5 model from:
+Both scripts load the trained drowsiness detection model:
 ```
 /workspace/drowsiness_detection/model/exp/weights/best.pt
 ```
