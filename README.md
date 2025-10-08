@@ -25,7 +25,7 @@ Follow these steps to install all dependencies and set up the Docker environment
 
 ### 1. Clone the repository
 ```bash
-git clone https://github.com/<your-username>/drowsiness_detection.git
+git clone https://github.com/ANadalCardenas/drowsiness_detection.git
 cd drowsiness_detection
 ```
 
