@@ -4,7 +4,7 @@ import cv2
 import os
 
 def main():
-    # Load default YOLOv5s model from PyTorch Hub
+    # Load the trained model
     model = torch.hub.load('ultralytics/yolov5', 'custom', path='/workspace/drowsiness_detection/model/exp/weights/best.pt', force_reload=True)
 
     # Initialize webcam

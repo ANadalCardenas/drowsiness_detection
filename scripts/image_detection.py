@@ -6,7 +6,7 @@ import numpy as np
 import cv2
 
 def main():
-    # Make detectionsrivate image with my model trained on private dataset
+    # Load the trained model
     model = torch.hub.load('ultralytics/yolov5', 'custom', path='/workspace/drowsiness_detection/model/exp/weights/best.pt', force_reload=True)
     img = cv2.imread("/workspace/drowsiness_detection/data/test/awake.3e3befe5-a20e-11f0-b1eb-1d37d0d6c335.jpg")
     img = cv2.cvtColor(img,  cv2.COLOR_BGR2RGB)

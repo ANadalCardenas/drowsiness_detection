@@ -51,9 +51,10 @@ def main():
 
     print("Image collection completed")
 
+    # Creates the folder in wich the user must save the label files when using the Label Studio to label teh user's own images
     # Get the parent folder of images (i.e., 'data')
     base_dir = os.path.dirname(IMAGES_PATH)
-    # Create 'labels' folder at the same level
+    # Create 'labels' folder at the same level. The user must 
     LABELS_PATH = os.path.join(base_dir, "labels")
     os.makedirs(LABELS_PATH, exist_ok=True)
 
