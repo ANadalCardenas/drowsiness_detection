@@ -8,7 +8,7 @@ import shutil
 
 LABELS = ['awake', 'drowsy']
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
-PROJECT_ROOT = os.path.dirname(SCRIPT_DIR)  # goes one level up
+PROJECT_ROOT = os.path.dirname(SCRIPT_DIR)
 IMAGES_PATH = os.path.join(PROJECT_ROOT, "data", "test")
 # number of images to collect per label
 NUM_IMGS = 2
@@ -26,7 +26,7 @@ def main():
         while img_count < NUM_IMGS:
             ret, frame = cap.read()
             if not ret:
-                print("⚠️ Failed to capture image")
+                print("Failed to capture image")
                 break
 
             # Show live webcam feed
@@ -38,7 +38,7 @@ def main():
                 imgname = os.path.join(IMAGES_PATH, f"{label}.{uuid.uuid1()}.jpg")
                 cv2.imwrite(imgname, frame)
                 img_count += 1
-                print(f"✅ Saved image {img_count} for {label}")
+                print(f" Saved image {img_count} for {label}")
             elif key == ord('q'):
                 cap.release()
                 cv2.destroyAllWindows()
@@ -49,7 +49,7 @@ def main():
         print(f"Finished collecting {img_count} images for {label}")
         time.sleep(2)  # pause between labels
 
-    print("Image collection completed ✅")
+    print("Image collection completed")
 
     # Get the parent folder of images (i.e., 'data')
     base_dir = os.path.dirname(IMAGES_PATH)
