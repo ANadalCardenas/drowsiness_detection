@@ -15,5 +15,7 @@ WORKDIR $WORKSPACE
 # Install YOLOv5
 RUN git clone https://github.com/ultralytics/yolov5.git
 ENV PIP_BREAK_SYSTEM_PACKAGES=1
+COPY requirements.txt .
 RUN python3 -m pip install --no-cache-dir -r yolov5/requirements.txt
+RUN python3 -m pip install --no-cache-dir -r requirements.txt
 
