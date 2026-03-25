@@ -77,6 +77,42 @@ Press **'q'** to quit.
 
 ---
 
+## 🧪 Testing
+
+The test suite lives in the `tests/` folder and uses `pytest`. All external dependencies (PyTorch, OpenCV, webcam, GPU) are mocked, so no hardware is required to run them.
+
+### Run all tests inside the container
+
+**1. Start the container (if not already running):**
+```bash
+docker compose up -d yolov5
+```
+
+**2. Open a shell inside the container:**
+```bash
+docker exec -it yolov5_container bash
+```
+
+**3. Run the tests:**
+```bash
+python3 -m pytest tests/ -v
+```
+
+### Useful options
+
+| Command | Description |
+|---|---|
+| `python3 -m pytest tests/` | Run all tests |
+| `python3 -m pytest tests/ -v` | Verbose output (shows each test name) |
+| `python3 -m pytest tests/test_image_detection.py` | Run a single test file |
+| `python3 -m pytest tests/ -k "q_key"` | Run tests whose name matches a keyword |
+
+### Continuous Integration
+
+A GitHub Actions workflow (`.github/workflows/ci.yml`) automatically builds the Docker image and runs the full test suite on every pull request targeting `main`.
+
+---
+
 ## 🧩 Training Pipeline
 
 Follow these steps to **collect, label, and train your model**:
