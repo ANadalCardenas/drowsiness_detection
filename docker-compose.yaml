@@ -10,6 +10,7 @@ services:
       - /home/${USER}/workspace/drowsiness_detection/scripts:/workspace/drowsiness_detection/scripts
       - /home/${USER}/workspace/drowsiness_detection/data:/workspace/drowsiness_detection/data
       - /home/${USER}/workspace/drowsiness_detection/model/exp:/workspace/drowsiness_detection/model/exp
+      - /home/${USER}/workspace/drowsiness_detection/tests:/workspace/drowsiness_detection/tests
       - /tmp/.X11-unix:/tmp/.X11-unix:rw
       - ${XAUTHORITY:-$HOME/.Xauthority}:/tmp/.Xauthority:ro
     devices:
